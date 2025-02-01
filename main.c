@@ -12,6 +12,10 @@
 const int width = 240;
 const int height = 160;
 
+int test(int a) {
+    return a + 1;
+}
+
 int main(void)
 {
     // https://www.cs.rit.edu/~tjh8300/CowBite/CowBiteSpec.htm#REG_DISPCNT
@@ -47,6 +51,7 @@ int main(void)
     // F   (W) = Enable Sprite Windows
     REG_DISPLAY_CTRL = DISPLAY_MODE | DISPLAY_BG2; // combine both
 
+    int a = test(10);
     for (int y = 0; y < height; y++)
     {
         int mul = y * 2;
