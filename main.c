@@ -1,5 +1,8 @@
 #include <stdint.h>
 
+#define RGB8(r, g, b) (((r) >> 3) | (((g) >> 3) << 5) | (((b) >> 3) << 10))
+#define RGB5(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
+
 #define REG_DISPLAY_CTRL *((volatile uint16_t *)(0x4000000))
 #define FRAME_BUFFER ((uint16_t *)(0x6000000))
 
@@ -46,9 +49,11 @@ int main(void)
 
     for (int y = 0; y < height; y++)
     {
+        int mul = y * 2;
+        int color = RGB8(255 % mul, 255 % (mul - y), 255 % mul);
         for (int x = 0; x < width; x++)
         {
-            FRAME_BUFFER[width * y + x] = 32000;
+            FRAME_BUFFER[width * y + x] = color;
         }
     }
 
